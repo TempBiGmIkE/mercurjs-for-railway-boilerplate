@@ -9,9 +9,16 @@ type HeroProps = {
   heading: string
   paragraph: string
   buttons: { label: string; path: string }[]
+  campaignLabel?: string
 }
 
-export const Hero = ({ image, heading, paragraph, buttons }: HeroProps) => {
+export const Hero = ({
+  image,
+  heading,
+  paragraph,
+  buttons,
+  campaignLabel,
+}: HeroProps) => {
   return (
     <section className="w-full flex container mt-5 flex-col lg:flex-row text-primary">
       <Image
@@ -28,6 +35,11 @@ export const Hero = ({ image, heading, paragraph, buttons }: HeroProps) => {
       <div className="w-full lg:order-2">
         <div className="border rounded-sm w-full px-6 flex items-end h-[calc(100%-144px)]">
           <div>
+            {campaignLabel ? (
+              <p className="text-sm tracking-[0.32em] uppercase text-accent mb-4">
+                {campaignLabel}
+              </p>
+            ) : null}
             <h2 className="font-bold mb-6 uppercase display-md max-w-[652px] text-4xl md:text-5xl leading-tight">
               {heading}
             </h2>

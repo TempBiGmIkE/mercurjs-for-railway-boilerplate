@@ -1,7 +1,7 @@
 import {
   BannerSection,
   BlogSection,
-  Hero,
+  DynamicHero,
   HomeCategories,
   HomeProductSection,
   ShopByStyleSection,
@@ -32,7 +32,9 @@ export async function generateMetadata({
     const locales = Array.from(
       new Set(
         (regions || [])
-          .map((r) => r.countries?.map((c) => c.iso_2) || [])
+          .map((r: { countries?: Array<{ iso_2?: string }> }) =>
+            r.countries?.map((c) => c.iso_2) || []
+          )
           .flat()
           .filter(Boolean)
       )
@@ -50,7 +52,7 @@ export async function generateMetadata({
 
   const title = "Home"
   const description =
-    "Welcome to Mercur B2C Demo! Create a modern marketplace that you own and customize in every aspect with high-performance, fully customizable storefront."
+    "The Sting Store - Culture Marketplace that you own and customize in every aspect with high-performance, fully customizable storefront."
   const ogImage = "/B2C_Storefront_Open_Graph.png"
   const canonical = `${baseUrl}/${locale}`
 
@@ -78,13 +80,13 @@ export async function generateMetadata({
     openGraph: {
       title: `${title} | ${
         process.env.NEXT_PUBLIC_SITE_NAME ||
-        "Mercur B2C Demo - Marketplace Storefront"
+        "The Sting Store - Culture Marketplace"
       }`,
       description,
       url: canonical,
       siteName:
         process.env.NEXT_PUBLIC_SITE_NAME ||
-        "Mercur B2C Demo - Marketplace Storefront",
+        "The Sting Store - Culture Marketplace",
       type: "website",
       images: [
         {
@@ -93,7 +95,8 @@ export async function generateMetadata({
           height: 630,
           alt:
             process.env.NEXT_PUBLIC_SITE_NAME ||
-            "Mercur B2C Demo - Marketplace Storefront",
+                  "The Sting Store - Culture Marketplace",
+
         },
       ],
     },
@@ -120,7 +123,7 @@ export default async function Home({
 
   const siteName =
     process.env.NEXT_PUBLIC_SITE_NAME ||
-    "Mercur B2C Demo - Marketplace Storefront"
+    "The Sting Store - Culture Marketplace"
 
   return (
     <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start text-primary">
@@ -160,20 +163,7 @@ export default async function Home({
         }}
       />
 
-      <Hero
-        image="/images/hero/Image.jpg"
-        heading="Snag your style in a flash"
-        paragraph="Buy, sell, and discover pre-loved gems from the trendiest brands."
-        buttons={[
-          { label: "Buy now", path: "/categories" },
-          {
-            label: "Sell now",
-            path:
-              process.env.NEXT_PUBLIC_VENDOR_URL ||
-              "https://vendor.mercurjs.com",
-          },
-        ]}
-      />
+      <DynamicHero variant={locale} />
       <div className="px-4 lg:px-8 w-full">
         <HomeProductSection heading="trending listings" locale={locale} home />
       </div>
