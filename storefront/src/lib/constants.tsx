@@ -26,6 +26,10 @@ export const paymentInfoMap: Record<
     title: "PayPal",
     icon: <CreditCard />,
   },
+  pp_monnify_monnify: {
+    title: "Monnify",
+    icon: <CreditCard />,
+  },
   pp_system_default: {
     title: "Manual Payment",
     icon: <Cash />,
@@ -39,6 +43,9 @@ export const isStripe = (providerId?: string) => {
 }
 export const isPaypal = (providerId?: string) => {
   return providerId?.startsWith("pp_paypal")
+}
+export const isMonnify = (providerId?: string) => {
+  return providerId?.toLowerCase().includes("monnify")
 }
 export const isManual = (providerId?: string) => {
   return providerId?.startsWith("pp_system_default")

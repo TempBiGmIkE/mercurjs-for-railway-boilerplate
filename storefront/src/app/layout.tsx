@@ -14,10 +14,7 @@ const funnelDisplay = Funnel_Display({
 
 export const metadata: Metadata = {
   title: {
-    template: `%s | ${
-      process.env.NEXT_PUBLIC_SITE_NAME ||
-      "The Sting Store - Culture Marketplace",
-    }`,
+    template: `%s | ${process.env.NEXT_PUBLIC_SITE_NAME || "The Sting Store - Culture Marketplace"}`,
     default:
       process.env.NEXT_PUBLIC_SITE_NAME ||
       "The Sting Store - Culture Marketplace",
